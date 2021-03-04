@@ -1,8 +1,10 @@
 <template>
+      <input type="text"  v-focus='10'>
+
   <div class="searchBox">
     <div class="row" :class="[modInput ? 'w80' : '']">
       <input
-        autofocus
+        v-focus='20'
         type="search"
         v-model="modInput"
         @keyup.enter="goto"
@@ -19,8 +21,8 @@
     >
       <span class="iconfont icon-search search-style"></span>
     </a>
-    {{autofocus}}
   </div>
+
 </template>
 
 <script lang='ts'>
@@ -32,7 +34,14 @@ export default defineComponent({
     const goto = () => {
       console.log("搜索关键字:" + modInput.value);
       if (modInput.value.trim() !== "") {
-        window.location.href = `https://www.baidu.com/s?wd=${modInput.value}`;
+        if (
+          modInput.value.trim().substring(0, 4) === "http" &&
+          modInput.value.length > 10
+        ) {
+          window.location.href = modInput.value;
+        } else {
+          window.location.href = `https://www.baidu.com/s?wd=${modInput.value}`;
+        }
         modInput.value = "";
       }
     };
@@ -40,6 +49,18 @@ export default defineComponent({
       modInput,
       goto,
     };
+  },
+  directives: {
+    focus: {
+      // 指令的定义 聚焦
+      mounted(el,val) {
+        console.log(el);
+        console.log(val);
+        
+        
+        setTimeout(()=>el.focus(), 1200);
+      },
+    },
   },
 });
 </script>
