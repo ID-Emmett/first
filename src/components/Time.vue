@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>{{timeCount}}</h1>
-    <button @click.prevent="timeStart">启动</button>
-    <button @click.prevent="timeEnd">关闭</button>
+    <span class="time-font">{{ timeCount }}</span>
+    <!-- <button @click.prevent="timeStart">启动</button>
+    <button @click.prevent="timeEnd">关闭</button> -->
   </div>
 </template>
 
@@ -10,14 +10,8 @@
 import { ref, defineComponent, onMounted, onUnmounted } from "vue";
 export default defineComponent({
   name: "Time",
-  props: {
-    msg: {
-      type: String,
-      required: true,
-    },
-  },
   setup: () => {
-    const timeCount = ref('00:00:00');
+    const timeCount = ref("00:00:00");
     const Timer: any = ref(null);
     const timeStart = () => {
       const nowTime = setInterval(() => {
@@ -30,7 +24,7 @@ export default defineComponent({
           now.getSeconds() < 10 ? "0" + now.getSeconds() : now.getSeconds();
         const Time = Hours + ":" + Minutes + ":" + Seconds;
         // console.log(Time);
-        timeCount.value = Time
+        timeCount.value = Time;
       }, 1000);
       Timer.value = nowTime;
     };
@@ -49,19 +43,17 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* a {
-  color: #42b983;
-}
-
-label {
-  margin: 0 0.5em;
+.time-font {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 50px;
   font-weight: bold;
-}
+  background: linear-gradient(to right, red, rgb(85, 85, 200));
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 5px 5px 5px #9e9191;
+  
+  color: transparent;
 
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
-} */
+
+}
 </style>

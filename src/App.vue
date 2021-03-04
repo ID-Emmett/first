@@ -1,16 +1,45 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <Time msg="ooo" />
+  <Time />
+  <ErrButtom text="设定" />
+  <SlowOut :text="slowTxt">
+    <!-- 组件接收一个数组作为显示文本 -->
+    <!-- 插槽-传递二级元素 -->
+    <p class="footer">ahgioangioasngiasnbgi</p>
+  </SlowOut>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import Time from "./components/Time.vue";
+import ErrButtom from "./components/ErrButtom.vue";
+import SlowOut from "./components/SlowOut.vue";
 
 export default defineComponent({
   name: "App",
+  setup: () => {
+    const slowTxt: string[] = [
+      "The",
+      "best",
+      "products",
+      "start",
+      "with",
+      "Sketch",
+      // '欢',
+      // '迎',
+      // '光',
+      // '临',
+      // 'aaassaryttghg<br>sgdg',
+      // '你好'
+    ];
+    return {
+      slowTxt,
+    };
+  },
   components: {
-    Time,
+    Time, //时间
+    ErrButtom, //故障按钮
+    SlowOut, //文字渐出
   },
 });
 </script>
