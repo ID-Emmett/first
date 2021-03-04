@@ -5,7 +5,10 @@
   <SlowOut :text="slowTxt">
     <!-- 组件接收一个数组作为显示文本 -->
     <!-- 插槽-传递二级元素 -->
-    <p class="footer">ahgioangioasngiasnbgi</p>
+    <!-- <p class="footer">ahgioangioasngiasnbgi</p> -->
+    <div class="footer">
+      <SearchInput />
+    </div>
   </SlowOut>
 </template>
 
@@ -14,22 +17,23 @@ import { defineComponent } from "vue";
 import Time from "./components/Time.vue";
 import ErrButtom from "./components/ErrButtom.vue";
 import SlowOut from "./components/SlowOut.vue";
+import SearchInput from "./components/SearchInput.vue";
 
 export default defineComponent({
   name: "App",
   setup: () => {
     const slowTxt: string[] = [
-      "The",
-      "best",
-      "products",
-      "start",
-      "with",
-      "Sketch",
-      // '欢',
-      // '迎',
-      // '光',
+      "What",
+      "needs",
+      "to",
+      "be",
+      "queried",
+      "?",
+      '欢',
+      '迎',
+      '光',
       // '临',
-      // 'aaassaryttghg<br>sgdg',
+      // 'ag',
       // '你好'
     ];
     return {
@@ -40,12 +44,15 @@ export default defineComponent({
     Time, //时间
     ErrButtom, //故障按钮
     SlowOut, //文字渐出
+    SearchInput,
   },
 });
 </script>
 
 <style>
 #app {
+  background: greenyellow;
+  height: 100vh;
   /* font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -43,7 +43,7 @@ export default defineComponent({
 .footer {
   height: 100px;
   width: 500px;
-  background-color: aqua;
+  /* background-color: aqua; */
   position: relative;
   top: 0.8em;
   opacity: 0;
