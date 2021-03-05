@@ -1,8 +1,8 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <Time />
-  <ErrButtom text="设定" />
-  <SlowOut :text="slowTxt">
+  <!-- <Time />
+  <ErrButtom text="设定" /> -->
+  <SlowOut :text="slowTxt" class="slow-out">
     <!-- 组件接收一个数组作为显示文本 -->
     <!-- 插槽-传递二级元素 -->
     <!-- <p class="footer">ahgioangioasngiasnbgi</p> -->
@@ -23,15 +23,15 @@ export default defineComponent({
   name: "App",
   setup: () => {
     const slowTxt: string[] = [
-      "What",
-      "needs",
-      "to",
-      "be",
-      "queried",
-      "?",
-      '欢',
-      '迎',
-      '光',
+      "非",
+      "淡泊",
+      "无以",
+      "明志",
+      ",",
+      "非",
+      '宁静',
+      '无以',
+      '致远!',
       // '临',
       // 'ag',
       // '你好'
@@ -50,8 +50,11 @@ export default defineComponent({
 </script>
 
 <style>
+.slow-out{
+  margin: 100px  0 0 100px;
+}
 #app {
-  background: greenyellow;
+  /* background: greenyellow; */
   height: 100vh;
   /* font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

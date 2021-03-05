@@ -1,7 +1,8 @@
 <template>
-  <div style="font-size: 32px">
+  <div style="font-size: 12px">
     <div id="slow-out">
       <h1 class="slow-txt">
+        <span><i>MOREN,</i></span><br />
         <span v-for="(item, index) in text" :key="index">
           <i>{{ item }}</i>
         </span>
@@ -33,8 +34,8 @@ export default defineComponent({
 
 <style >
 #slow-out {
-  width: 600px;
-  margin: 0 auto;
+  width: 620px;
+  /* margin: 0 auto; */
 }
 .slow-txt {
   margin: 0;
@@ -42,7 +43,7 @@ export default defineComponent({
 }
 .footer {
   height: 100px;
-  width: 500px;
+  width: 600px;
   /* background-color: aqua; */
   position: relative;
   top: 0.8em;
@@ -50,7 +51,7 @@ export default defineComponent({
   animation: 0.5s swift-up ease-out forwards, 0.5s fade-in ease-out forwards;
   animation-delay: 0.9s;
 }
-p {
+/* p {
   font-size: 0.9em;
   color: #666;
   line-height: 1.3em;
@@ -59,7 +60,7 @@ p {
   opacity: 0;
   animation: 0.5s swift-up ease-out forwards, 0.5s fade-in ease-out forwards;
   animation-delay: 0.9s;
-}
+} */
 @keyframes fade-in {
   to {
     opacity: 1;
@@ -76,7 +77,7 @@ p {
 .slow-txt > span > i {
   font-style: normal;
   position: relative;
-  margin: 0 0.1em;
+  /* margin: 0 0.1em; */
   top: 2em;
   animation: 0.8s swift-up ease-in-out forwards;
 }
