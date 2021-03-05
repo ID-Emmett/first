@@ -154,8 +154,8 @@ export default defineComponent({
     focus: {
       // 指令的定义 聚焦
       mounted(el, val) {
-        console.log(el);
-        console.log(val);
+        // console.log(el);
+        // console.log(val);
         setTimeout(() => el.focus(), 1200);
       },
     },
@@ -170,6 +170,7 @@ export default defineComponent({
   display: flex;
   width: 100%;
   font-family: Helvetica, sans-serif;
+  /* background: #03c9a9; */
 }
 .search-tab {
   margin-top: 60px;
@@ -199,11 +200,12 @@ export default defineComponent({
   margin-right: 0px;
 }
 .moren-btn {
-  width: calc(20% - 12px);
+  /* width: calc(20% - 4px); */
+  width: 56px;
   border: 1px solid #03c9a9;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 2px rgba(90, 63, 63, 0.25);
   border-radius: 4px;
-  margin-right: calc(-20% + 12px);
+  /* margin-right: calc(-20%); */
   opacity: 0;
   transition: 0.5s all;
   display: flex;
@@ -214,18 +216,18 @@ export default defineComponent({
 .moren-show {
   opacity: 1;
   cursor: pointer;
-  margin-left: 12px;
+  margin-left: 4px;
 }
 .search-style {
   color: #03c9a9;
 }
 .row {
-  width: 100%;
+  width: 90%;
   position: relative;
   transition: 0.5s all;
 }
 .w80 {
-  width: 80%;
+  width: calc(90% - 60px);
   transition: 0.5s all;
 }
 .row input {

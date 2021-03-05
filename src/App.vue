@@ -1,15 +1,17 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
   <!-- <Time />
   <ErrButtom text="设定" /> -->
-  <SlowOut :text="slowTxt" class="slow-out">
-    <!-- 组件接收一个数组作为显示文本 -->
-    <!-- 插槽-传递二级元素 -->
-    <!-- <p class="footer">ahgioangioasngiasnbgi</p> -->
-    <div class="footer">
-      <SearchInput />
-    </div>
-  </SlowOut>
+
+  <div class="content-box">
+    <Clipboard class="clip-board" v-drag />
+    <div class="center-line"></div>
+    <SlowOut :text="slowTxt" class="slow-out">
+      <!-- 插槽-传递二级元素 -->
+      <div class="footer">
+        <SearchInput />
+      </div>
+    </SlowOut>
+  </div>
 </template>
 
 <script lang="ts">
@@ -18,6 +20,7 @@ import Time from "./components/Time.vue";
 import ErrButtom from "./components/ErrButtom.vue";
 import SlowOut from "./components/SlowOut.vue";
 import SearchInput from "./components/SearchInput.vue";
+import Clipboard from "./components/Clipboard.vue";
 
 export default defineComponent({
   name: "App",
@@ -29,9 +32,9 @@ export default defineComponent({
       "明志",
       ",",
       "非",
-      '宁静',
-      '无以',
-      '致远!',
+      "宁静",
+      "无以",
+      "致远!",
       // '临',
       // 'ag',
       // '你好'
@@ -44,158 +47,61 @@ export default defineComponent({
     Time, //时间
     ErrButtom, //故障按钮
     SlowOut, //文字渐出
-    SearchInput,
+    SearchInput, //搜索框
+    Clipboard, //剪切板
+  },
+  directives: {
+    drag: {
+      // 指令的定义
+      mounted(el) {
+        let isDown = false;
+        //鼠标按下事件
+        el.onmousedown = function (e: any) {
+          // const clipboard = document.querySelector('.clip-board')
+          // console.log(clipboard);
+          
+          isDown = true;
+        };
+        //鼠标移动
+        window.onmousemove = function (e: any) {
+          if (isDown === false) return;
+          let nx = e.clientX;
+          el.style.width = nx + 20 + "px";
+          // console.log(nx);
+        };
+        //鼠标抬起事件
+        el.onmouseup = function (e: any) {
+          console.log("鼠标抬起", e);
+          //开关关闭
+          isDown = false;
+        };
+      },
+    },
   },
 });
 </script>
 
 <style>
-.slow-out{
-  margin: 100px  0 0 100px;
+@import "../src/assets/style/init.css";
+.content-box {
+  display: flex;
+  min-height: 100vh;
 }
-#app {
-  /* background: greenyellow; */
+
+.clip-board {
+  /* flex: 1; */
+  width: 100px;
+}
+.center-line {
+  width: 10px;
+    width: 110px;
+
   height: 100vh;
-  /* font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px; */
+  background-color: rgb(3, 11, 8);
 }
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  font-family: Helvetica, sans-serif, Arial;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  padding: 0;
-}
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-  font-family: Helvetica, sans-serif, Arial;
-}
-
-body {
-  line-height: 1;
-  /* background-color: #EFEEEE; */
-}
-
-ol,
-ul {
-  list-style: none;
-}
-
-blockquote,
-q {
-  quotes: none;
-}
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
+.slow-out {
+  flex: 1;
+  padding: 80px;
+  padding-right: 0;
 }
 </style>

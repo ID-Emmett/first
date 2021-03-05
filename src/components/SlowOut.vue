@@ -34,8 +34,8 @@ export default defineComponent({
 
 <style >
 #slow-out {
-  width: 620px;
-  /* margin: 0 auto; */
+  /* width: 620px; */
+  margin: 0 auto;
 }
 .slow-txt {
   margin: 0;
@@ -43,7 +43,7 @@ export default defineComponent({
 }
 .footer {
   height: 100px;
-  width: 600px;
+  /* width: 600px; */
   /* background-color: aqua; */
   position: relative;
   top: 0.8em;
