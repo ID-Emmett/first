@@ -12,6 +12,7 @@
           opacity: [index === iconBottom ? '1' : ''],
         }"
         @click.prevent="iconIndex(index)"
+        @dblclick.prevent="dbIconIndex"
       ></span>
     </div>
     <div
@@ -25,7 +26,7 @@
   <div class="searchBox">
     <div class="row" :class="[modInput ? 'w80' : '']">
       <input
-        v-focus="20"
+        v-focus="{ status: statusFocus }"
         type="search"
         v-model="modInput"
         @blur="outInput"
@@ -53,12 +54,29 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, ref, onMounted, reactive, toRefs } from "vue";
+import {
+  defineComponent,
+  ref,
+  onMounted,
+  reactive,
+  toRefs,
+  computed,
+  watchEffect,
+} from "vue";
 export default defineComponent({
   name: "SearchInput",
-  setup: () => {
+  props: {
+    status: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  setup: (props) => {
     // console.log(localStorage.getItem('search_engine'));
     // const search_engine = Number(localStorage.getItem("search_engine")) || 0;
+    const statusFocus = ref(true);
+    // console.log(statusFocus);
+
     const modInput = ref("");
     const searList = [
       {
@@ -106,9 +124,10 @@ export default defineComponent({
       modInput.value = "";
     };
     const iconBottom = ref(0);
-    const setData = reactive({
-      color: "",
-    });
+    // const setData = reactive({
+    //   color: "",
+    // });
+
     const iconIndex = (i: number) => {
       iconBottom.value = i;
     };
@@ -119,7 +138,12 @@ export default defineComponent({
         iconBottom.value++;
       }
     };
+    const dbIconIndex = () => {      
+      statusFocus.value = true;
+    };
     const outInput = () => {
+      //自定义指令自动聚焦失效
+      statusFocus.value = false;
       console.log("移除keydown事件");
       // 移除keydown事件
       window.removeEventListener("keydown", (e) => keyeven(e), true);
@@ -135,15 +159,16 @@ export default defineComponent({
       // 监听keydown事件
       window.addEventListener("keydown", (e) => keyeven(e), false);
       setTimeout(() => {
-          iconBottom.value = Number(localStorage.getItem("search_engine")) || 0;
+        iconBottom.value = Number(localStorage.getItem("search_engine")) || 0;
       }, 1200);
     });
-    // watchEffect(() => {
-    //   // 计算底边颜色
-    //   setData.color = searList[iconBottom.value].color;
-    // });
-    const toData = toRefs(setData);
+    watchEffect(() => {
+      // 计算底边颜色
+      statusFocus.value = props.status;
+    });
+    // const toData = toRefs(setData);
     return {
+      statusFocus,
       modInput,
       searList,
       goto,
@@ -151,16 +176,21 @@ export default defineComponent({
       outInput,
       iconIndex,
       iconBottom,
-      ...toData,
+      dbIconIndex,
+      // ...toData,
     };
   },
   directives: {
     focus: {
       // 指令的定义 聚焦
       mounted(el, val) {
-        // console.log(el);
-        // console.log(val);
         setTimeout(() => el.focus(), 1200);
+      },
+      updated(el, val) {
+        // console.log(val);
+        if (val.value.status) {
+          el.focus();
+        }
       },
     },
   },
