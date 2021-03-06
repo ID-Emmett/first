@@ -3,8 +3,11 @@
   <ErrButtom text="设定" /> -->
 
   <div class="content-box">
-    <div class="clip-board" :class="{'list-show':!statusBack}">
-      <div class="button-back" @click.prevent="but_back">按钮</div>
+    <div class="clip-board" :class="{ 'list-show': !statusBack }">
+      <div class="button-back ifas xs" @click.prevent="but_back">
+        <span class="iconfont icon-cebianlan-shouqi"></span>
+        <span class="iconfont icon-guanbianniu"></span>
+      </div>
       <Clipboard />
     </div>
 
@@ -47,11 +50,11 @@ export default defineComponent({
     const statusBack = ref(false);
     const but_back = () => {
       statusBack.value = !statusBack.value;
-      localStorage.setItem('search_engine','3')
+      localStorage.setItem("search_engine", "3");
     };
     return {
       slowTxt,
-      statusBack,//回退状态
+      statusBack, //回退状态
       but_back, //回退列表事件
     };
   },
@@ -95,31 +98,55 @@ export default defineComponent({
 
 <style>
 @import "../src/assets/style/init.css";
+@import "../src/assets/style/Icon.css";
 .content-box {
   display: flex;
   min-height: 100vh;
 }
 
 .clip-board {
-  width: 200px;
-  min-width: 200px;
+  width: 300px;
+  min-width: 300px;
   /* margin-left: -200px;  */
   transition: 0.3s all;
   position: relative;
 }
-.list-show{
-  margin-left: -200px;
+.list-show {
+  margin-left: -300px;
 }
 .button-back {
   position: absolute;
-  top: 0;
-  right: -32px;
+  top: -30px;
+  right: -30px;
+  transition: 0.3s all;
+  opacity: 0.5;
 }
-/* .center-line {
-  width: 10px;
-  height: 100vh;
-  background-color: rgb(3, 11, 8);
-} */
+.list-show .ifas {
+  transform: rotate(180deg);
+  right: -22px;
+}
+.icon-cebianlan-shouqi {
+  display: block;
+  color: rgb(200, 188, 188);
+  font-size: 30px;
+  border-radius: 4px;
+  transition: 0.2s all;
+}
+.icon-cebianlan-shouqi:hover {
+  transform: scaleY(1.2);
+  transition: 0.2s all;
+}
+.icon-guanbianniu {
+  display: block;
+  font-size: 30px;
+  color: rgb(131, 40, 40);
+  transition: 0.2s all;
+}
+.icon-guanbianniu:hover {
+  transform: rotate(90deg);
+  color: red;
+  transition:ease-out 0.2s all;
+}
 .slow-out {
   flex: 1;
   padding: 80px;
