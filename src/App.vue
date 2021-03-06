@@ -3,8 +3,12 @@
   <ErrButtom text="设定" /> -->
 
   <div class="content-box">
-    <Clipboard class="clip-board" v-drag />
-    <div class="center-line"></div>
+    <div class="clip-board" :class="{'list-show':!statusBack}">
+      <div class="button-back" @click.prevent="but_back">按钮</div>
+      <Clipboard />
+    </div>
+
+    <!-- <div class="center-line" v-drag></div> -->
     <SlowOut :text="slowTxt" class="slow-out">
       <!-- 插槽-传递二级元素 -->
       <div class="footer">
@@ -15,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import Time from "./components/Time.vue";
 import ErrButtom from "./components/ErrButtom.vue";
 import SlowOut from "./components/SlowOut.vue";
@@ -39,8 +43,16 @@ export default defineComponent({
       // 'ag',
       // '你好'
     ];
+    // 按钮收回列表
+    const statusBack = ref(false);
+    const but_back = () => {
+      statusBack.value = !statusBack.value;
+      localStorage.setItem('search_engine','3')
+    };
     return {
       slowTxt,
+      statusBack,//回退状态
+      but_back, //回退列表事件
     };
   },
   components: {
@@ -55,19 +67,19 @@ export default defineComponent({
       // 指令的定义
       mounted(el) {
         let isDown = false;
+        var elwidth: number;
+        const clipboard: any = document.querySelector(".clip-board");
+        // console.log(clipboard);
         //鼠标按下事件
         el.onmousedown = function (e: any) {
-          // const clipboard = document.querySelector('.clip-board')
-          // console.log(clipboard);
-          
+          elwidth = clipboard.clientWidth - e.clientX;
           isDown = true;
         };
         //鼠标移动
         window.onmousemove = function (e: any) {
           if (isDown === false) return;
           let nx = e.clientX;
-          el.style.width = nx + 20 + "px";
-          // console.log(nx);
+          clipboard.style.width = nx + elwidth + "px";
         };
         //鼠标抬起事件
         el.onmouseup = function (e: any) {
@@ -89,19 +101,31 @@ export default defineComponent({
 }
 
 .clip-board {
-  /* flex: 1; */
-  width: 100px;
+  width: 200px;
+  min-width: 200px;
+  /* margin-left: -200px;  */
+  transition: 0.3s all;
+  position: relative;
 }
-.center-line {
+.list-show{
+  margin-left: -200px;
+}
+.button-back {
+  position: absolute;
+  top: 0;
+  right: -32px;
+}
+/* .center-line {
   width: 10px;
-    width: 110px;
-
   height: 100vh;
   background-color: rgb(3, 11, 8);
-}
+} */
 .slow-out {
   flex: 1;
   padding: 80px;
   padding-right: 0;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 100px;
 }
 </style>

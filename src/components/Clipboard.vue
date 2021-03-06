@@ -1,5 +1,8 @@
 <template>
-  <div class="Clipboard"></div>
+  <div id="clipboard-box">
+    <div>插槽-传递二级元素插槽-传递二级元素插槽-传递二级元素</div>
+    <input type="text" />输入框
+  </div>
 </template>
 
 <script lang='ts'>
@@ -13,9 +16,11 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.Clipboard {
-  /* width: 200px;
-  height: 200px; */
-  background: red;
+#clipboard-box {
+  background: rgb(190, 181, 181);
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
+
 </style>

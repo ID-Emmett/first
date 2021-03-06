@@ -33,31 +33,32 @@
         @keyup.tab.capture="keyTab"
         id="search"
         placeholder=" "
+        :style="{ border: '1px solid' + searList[iconBottom].color }"
       />
       <label for="search">搜索</label>
     </div>
     <a
-      :title="searList[iconBottom].name"
+      :title="`以${searList[iconBottom].name}进行检索`"
       class="moren-btn"
       :class="[modInput ? 'moren-show' : '']"
       @click.prevent="goto"
+      :style="{ border: '1px solid' + searList[iconBottom].color }"
     >
-      <span class="iconfont icon-search search-style"></span>
+      <span
+        class="iconfont icon-search search-style"
+        :style="{ color: searList[iconBottom].color }"
+      ></span>
     </a>
   </div>
 </template>
 
 <script lang='ts'>
-import {
-  defineComponent,
-  ref,
-  onMounted,
-  reactive,
-  toRefs,
-} from "vue";
+import { defineComponent, ref, onMounted, reactive, toRefs } from "vue";
 export default defineComponent({
   name: "SearchInput",
   setup: () => {
+    // console.log(localStorage.getItem('search_engine'));
+    // const search_engine = Number(localStorage.getItem("search_engine")) || 0;
     const modInput = ref("");
     const searList = [
       {
@@ -133,6 +134,9 @@ export default defineComponent({
     onMounted(() => {
       // 监听keydown事件
       window.addEventListener("keydown", (e) => keyeven(e), false);
+      setTimeout(() => {
+          iconBottom.value = Number(localStorage.getItem("search_engine")) || 0;
+      }, 1200);
     });
     // watchEffect(() => {
     //   // 计算底边颜色
@@ -185,7 +189,7 @@ export default defineComponent({
   transition: ease-out 0.3s all;
 }
 .seTab-item span {
-  margin-right: 10px;
+  padding-right: 10px;
   font-size: 30px;
   cursor: pointer;
   transition: ease-out 0.3s all;
@@ -197,7 +201,7 @@ export default defineComponent({
 }
 .seTab-item span:last-child {
   /* background: #03c9a9; */
-  margin-right: 0px;
+  padding-right: 0px;
 }
 .moren-btn {
   /* width: calc(20% - 4px); */
@@ -212,14 +216,17 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   background: #fff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
 }
 .moren-show {
   opacity: 1;
   cursor: pointer;
   margin-left: 4px;
+  transition: all ease-in-out 0.2s;
 }
 .search-style {
-  color: #03c9a9;
+  /* color: #03c9a9; */
+  transition: all ease-in-out 0.2s;
 }
 .row {
   width: 90%;
@@ -255,9 +262,9 @@ export default defineComponent({
 }
 
 .row input:focus {
-  border: 1px solid #1ba39c;
+  /* border: 10px solid #1ba39c; */
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
 }
-
 .row input:focus + label {
   transform: translateX(calc(-100% - 2.5em));
   color: #1d5252;
