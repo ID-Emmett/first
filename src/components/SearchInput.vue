@@ -176,6 +176,7 @@ export default defineComponent({
     onMounted(() => {
       editor.config.historyMaxSize = 50; // 修改为 50 步
       editor.highlight = (window as any).hljs;
+      (window as any).hljs.configure({useBR: true});
       editor.config.languageType = [
         "JavaScript",
         "TypeScript",
