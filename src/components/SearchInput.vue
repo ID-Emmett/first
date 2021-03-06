@@ -51,6 +51,7 @@
       ></span>
     </a>
   </div>
+  <div id="editor"></div>
 </template>
 
 <script lang='ts'>
@@ -63,6 +64,7 @@ import {
   computed,
   watchEffect,
 } from "vue";
+import E from "wangeditor";
 export default defineComponent({
   name: "SearchInput",
   props: {
@@ -72,10 +74,12 @@ export default defineComponent({
     },
   },
   setup: (props) => {
+    
     // console.log(localStorage.getItem('search_engine'));
     // const search_engine = Number(localStorage.getItem("search_engine")) || 0;
     const statusFocus = ref(true);
     // console.log(statusFocus);
+      const editor = new E("#editor");
 
     const modInput = ref("");
     const searList = [
@@ -132,13 +136,27 @@ export default defineComponent({
       iconBottom.value = i;
     };
     const keyTab = () => {
+      // console.log(strhtml);
+      
+      // editor.txt.html(strhtml.value)
+
       if (iconBottom.value >= searList.length - 1) {
         iconBottom.value = 0;
       } else {
         iconBottom.value++;
       }
     };
-    const dbIconIndex = () => {      
+    const strhtml:any = ref('')
+    const dbIconIndex = () => {
+
+      // console.log(editor.txt.text());
+      console.log(editor.txt.html());
+      // strhtml.value =  editor.txt.html()
+      let aaa:any =  editor.txt.html()
+      setTimeout(()=>{
+        editor.txt.html(aaa)
+      },1000*10)
+
       statusFocus.value = true;
     };
     const outInput = () => {
@@ -156,6 +174,32 @@ export default defineComponent({
       }
     };
     onMounted(() => {
+      editor.config.historyMaxSize = 50; // 修改为 50 步
+      editor.highlight = (window as any).hljs;
+      editor.config.languageType = [
+        "JavaScript",
+        "TypeScript",
+        "CSS",
+        "Html",
+        "Bash",
+        "C",
+        "C#",
+        "C++",
+        "Java",
+        "JSON",
+        "Plain text",
+        "XML",
+        "SQL",
+        "Go",
+        "Kotlin",
+        "Lua",
+        "Markdown",
+        "PHP",
+        "Python",
+        "Shell Session",
+        "Ruby",
+      ];
+      editor.create();
       // 监听keydown事件
       window.addEventListener("keydown", (e) => keyeven(e), false);
       setTimeout(() => {
@@ -182,7 +226,7 @@ export default defineComponent({
   },
   directives: {
     focus: {
-      // 指令的定义 聚焦
+      // 组件指令的定义 聚焦
       mounted(el, val) {
         setTimeout(() => el.focus(), 1200);
       },
