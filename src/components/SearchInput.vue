@@ -53,7 +53,7 @@
   </div>
   <!-- <div v-html="strhtml"></div> -->
 
-  <div id="editor"></div>
+  <!-- <div id="editor"></div> -->
 </template>
 
 <script lang='ts'>
@@ -80,7 +80,7 @@ export default defineComponent({
     // const search_engine = Number(localStorage.getItem("search_engine")) || 0;
     const statusFocus = ref(true);
     // console.log(statusFocus);
-    const editor = new E("#editor");
+    // const editor = new E("#editor");
 
     const modInput = ref("");
     const searList = [
@@ -147,8 +147,8 @@ export default defineComponent({
     const strhtml: any = ref("");
     const dbIconIndex = () => {
       // console.log(editor.txt.text());
-      console.log(editor.txt.html());
-      localStorage.setItem("editor_txt", editor.txt.html() || "");
+      // console.log(editor.txt.html());
+      // localStorage.setItem("editor_txt", editor.txt.html() || "");
       // strhtml.value = editor.txt.html();
       // let aaa: any = editor.txt.html();
       // setTimeout(() => {
@@ -173,42 +173,42 @@ export default defineComponent({
       }
     };
     onMounted(() => {
-      editor.config.historyMaxSize = 50; // 修改为 50 步
-      editor.highlight = (window as any).hljs;
-      const morentxt = localStorage.getItem("editor_txt");
-      strhtml.value = morentxt;
-      editor.config.menus = [
-        "head",
-        "bold",
-        "fontSize",
-        "fontName",
-        "italic",
-        "underline",
-        "strikeThrough",
-        "indent",
-        "lineHeight",
-        "foreColor",
-        "backColor",
-        "link",
-        "list",
-        "todo",
-        "justify",
-        "quote",
-        "emoticon",
-        "image",
-        "video",
-        "table",
-        "code",
-        "splitLine",
-        "undo",
-        "redo",
-      ];
-      // 编辑器聚焦
-      editor.config.focus = false;
-      editor.config.placeholder = 'save message'
-      editor.create();
-      //取值html 渎text
-      editor.txt.text(morentxt || "");
+      // editor.config.historyMaxSize = 50; // 修改为 50 步
+      // editor.highlight = (window as any).hljs;
+      // const morentxt = localStorage.getItem("editor_txt");
+      // strhtml.value = morentxt;
+      // editor.config.menus = [
+      //   "head",
+      //   "bold",
+      //   "fontSize",
+      //   "fontName",
+      //   "italic",
+      //   "underline",
+      //   "strikeThrough",
+      //   "indent",
+      //   "lineHeight",
+      //   "foreColor",
+      //   "backColor",
+      //   "link",
+      //   "list",
+      //   "todo",
+      //   "justify",
+      //   "quote",
+      //   "emoticon",
+      //   "image",
+      //   "video",
+      //   "table",
+      //   "code",
+      //   "splitLine",
+      //   "undo",
+      //   "redo",
+      // ];
+      // // 编辑器聚焦
+      // editor.config.focus = false;
+      // editor.config.placeholder = 'save message'
+      // editor.create();
+      // //取值html 渎text
+      // editor.txt.text(morentxt || "");
       // 监听keydown事件
       window.addEventListener("keydown", (e) => keyeven(e), false);
       setTimeout(() => {

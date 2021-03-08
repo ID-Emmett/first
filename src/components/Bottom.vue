@@ -1,5 +1,15 @@
 <template>
   <footer class="bottom">
+    <div
+      class="e-input"
+      @click="eInput = !eInput"
+      :class="[eInput ? 'e-input-da' : '']"
+    >
+      按钮
+    </div>
+    <!-- <transition-group name="dropanim"> -->
+      <DropDown status="瞬移组件拿到的值" v-if="eInput" />
+    <!-- </transition-group> -->
     <Time class="com-time" color="" />
     <p class="area-number" title="存储区字符数">{{ areaValue.length }}</p>
     <div class="area-lable">
@@ -28,11 +38,13 @@
 <script lang='ts'>
 import { defineComponent, ref, watch, onMounted } from "vue";
 import Time from "../components/Time.vue";
+import DropDown from "../components/dropDown.vue";
 export default defineComponent({
   name: "Bottom",
   data() {
     return {
       inputB: false,
+      eInput: false,
     };
   },
   setup() {
@@ -74,6 +86,7 @@ export default defineComponent({
   },
   components: {
     Time,
+    DropDown,
   },
 });
 </script>
@@ -183,5 +196,26 @@ export default defineComponent({
 }
 .area-icon {
   transition: all 0.4s;
+}
+/* 富文本按钮 */
+.e-input {
+  width: 50px;
+  height: 100%;
+  background: #5096fa;
+}
+.e-input-da {
+  width: 100px;
+  height: 100%;
+  background: rgb(143, 82, 82);
+}
+
+.dropanim-enter-active,
+.dropanim-leave-active {
+  transition: opacity 2s ease;
+}
+
+.dropanim-enter-from,
+.dropanim-leave-to {
+  opacity: 0;
 }
 </style>
