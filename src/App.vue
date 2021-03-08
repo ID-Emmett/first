@@ -2,6 +2,9 @@
   <!-- <Time />
   <ErrButtom text="设定" /> -->
   <Content />
+  <transition appear name="fade">
+    <Bottom />
+  </transition>
 </template>
 
 <script lang="ts">
@@ -9,6 +12,7 @@ import { defineComponent, ref } from "vue";
 import Time from "./components/Time.vue";
 import ErrButtom from "./components/ErrButtom.vue";
 import Content from "./components/Content.vue";
+import Bottom from "./components/Bottom.vue";
 
 export default defineComponent({
   name: "App",
@@ -17,7 +21,9 @@ export default defineComponent({
     Time, //时间
     ErrButtom, //故障按钮
     Content, //主体内容
+    Bottom, //底部
   },
+
   directives: {
     drag: {
       // 指令的定义
@@ -52,4 +58,13 @@ export default defineComponent({
 <style>
 @import "../src/assets/style/init.css";
 @import "../src/assets/style/Icon.css";
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

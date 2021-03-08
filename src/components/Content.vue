@@ -59,7 +59,7 @@ export default defineComponent({
 <style  scoped>
 .content-box {
   display: flex;
-  min-height: 100vh;
+  height: calc(100vh - 24px);
 }
 
 .sidebar {

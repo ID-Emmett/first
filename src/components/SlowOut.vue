@@ -1,8 +1,8 @@
 <template>
-  <div style="font-size: 12px">
+  <div style="font-size: 16px">
     <div id="slow-out">
       <h1 class="slow-txt">
-        <span><i>MOREN,</i></span><br />
+        <span><i>Hello,</i></span><br />
         <span v-for="(item, index) in text" :key="index">
           <i>{{ item }}</i>
         </span>

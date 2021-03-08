@@ -36,7 +36,7 @@
         placeholder=" "
         :style="{ border: '1px solid' + searList[iconBottom].color }"
       />
-      <label for="search">搜索</label>
+      <label for="search">{{ searList[iconBottom].name }}</label>
     </div>
     <a
       :title="`以${searList[iconBottom].name}进行检索`"
@@ -51,6 +51,8 @@
       ></span>
     </a>
   </div>
+  <!-- <div v-html="strhtml"></div> -->
+
   <div id="editor"></div>
 </template>
 
@@ -74,12 +76,11 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    
     // console.log(localStorage.getItem('search_engine'));
     // const search_engine = Number(localStorage.getItem("search_engine")) || 0;
     const statusFocus = ref(true);
     // console.log(statusFocus);
-      const editor = new E("#editor");
+    const editor = new E("#editor");
 
     const modInput = ref("");
     const searList = [
@@ -136,33 +137,31 @@ export default defineComponent({
       iconBottom.value = i;
     };
     const keyTab = () => {
-      // console.log(strhtml);
-      
-      // editor.txt.html(strhtml.value)
-
       if (iconBottom.value >= searList.length - 1) {
         iconBottom.value = 0;
       } else {
         iconBottom.value++;
       }
     };
-    const strhtml:any = ref('')
-    const dbIconIndex = () => {
 
+    const strhtml: any = ref("");
+    const dbIconIndex = () => {
       // console.log(editor.txt.text());
       console.log(editor.txt.html());
-      // strhtml.value =  editor.txt.html()
-      let aaa:any =  editor.txt.html()
-      setTimeout(()=>{
-        editor.txt.html(aaa)
-      },1000*10)
+      localStorage.setItem("editor_txt", editor.txt.html() || "");
+      strhtml.value = editor.txt.html();
+      let aaa: any = editor.txt.html();
+      setTimeout(() => {
+        editor.txt.html(aaa);
+        console.log(editor.txt.html());
+      }, 1000 * 10);
 
       statusFocus.value = true;
     };
     const outInput = () => {
       //自定义指令自动聚焦失效
       statusFocus.value = false;
-      console.log("移除keydown事件");
+      // console.log("移除keydown事件");
       // 移除keydown事件
       window.removeEventListener("keydown", (e) => keyeven(e), true);
     };
@@ -176,31 +175,10 @@ export default defineComponent({
     onMounted(() => {
       editor.config.historyMaxSize = 50; // 修改为 50 步
       editor.highlight = (window as any).hljs;
-      (window as any).hljs.configure({useBR: true});
-      editor.config.languageType = [
-        "JavaScript",
-        "TypeScript",
-        "CSS",
-        "Html",
-        "Bash",
-        "C",
-        "C#",
-        "C++",
-        "Java",
-        "JSON",
-        "Plain text",
-        "XML",
-        "SQL",
-        "Go",
-        "Kotlin",
-        "Lua",
-        "Markdown",
-        "PHP",
-        "Python",
-        "Shell Session",
-        "Ruby",
-      ];
-      editor.create();
+      const morentxt = localStorage.getItem("editor_txt");
+      strhtml.value = morentxt;
+      //取值html 渎text
+      editor.txt.text(morentxt || "");
       // 监听keydown事件
       window.addEventListener("keydown", (e) => keyeven(e), false);
       setTimeout(() => {
@@ -211,7 +189,6 @@ export default defineComponent({
       // 计算底边颜色
       statusFocus.value = props.status;
     });
-    // const toData = toRefs(setData);
     return {
       statusFocus,
       modInput,
@@ -222,6 +199,7 @@ export default defineComponent({
       iconIndex,
       iconBottom,
       dbIconIndex,
+      strhtml,
       // ...toData,
     };
   },
@@ -275,7 +253,6 @@ export default defineComponent({
   transition: ease-out 0.3s all;
 }
 .seTab-item span:last-child {
-  /* background: #03c9a9; */
   padding-right: 0px;
 }
 .moren-btn {
@@ -284,7 +261,6 @@ export default defineComponent({
   border: 1px solid #03c9a9;
   box-shadow: 0px 1px 2px rgba(90, 63, 63, 0.25);
   border-radius: 4px;
-  /* margin-right: calc(-20%); */
   opacity: 0;
   transition: 0.5s all;
   display: flex;
@@ -300,7 +276,6 @@ export default defineComponent({
   transition: all ease-in-out 0.2s;
 }
 .search-style {
-  /* color: #03c9a9; */
   transition: all ease-in-out 0.2s;
 }
 .row {
