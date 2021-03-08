@@ -149,12 +149,12 @@ export default defineComponent({
       // console.log(editor.txt.text());
       console.log(editor.txt.html());
       localStorage.setItem("editor_txt", editor.txt.html() || "");
-      strhtml.value = editor.txt.html();
-      let aaa: any = editor.txt.html();
-      setTimeout(() => {
-        editor.txt.html(aaa);
-        console.log(editor.txt.html());
-      }, 1000 * 10);
+      // strhtml.value = editor.txt.html();
+      // let aaa: any = editor.txt.html();
+      // setTimeout(() => {
+      //   editor.txt.html(aaa);
+      //   console.log(editor.txt.html());
+      // }, 1000);
 
       statusFocus.value = true;
     };
@@ -177,6 +177,36 @@ export default defineComponent({
       editor.highlight = (window as any).hljs;
       const morentxt = localStorage.getItem("editor_txt");
       strhtml.value = morentxt;
+      editor.config.menus = [
+        "head",
+        "bold",
+        "fontSize",
+        "fontName",
+        "italic",
+        "underline",
+        "strikeThrough",
+        "indent",
+        "lineHeight",
+        "foreColor",
+        "backColor",
+        "link",
+        "list",
+        "todo",
+        "justify",
+        "quote",
+        "emoticon",
+        "image",
+        "video",
+        "table",
+        "code",
+        "splitLine",
+        "undo",
+        "redo",
+      ];
+      // 编辑器聚焦
+      editor.config.focus = false;
+      editor.config.placeholder = 'save message'
+      editor.create();
       //取值html 渎text
       editor.txt.text(morentxt || "");
       // 监听keydown事件
