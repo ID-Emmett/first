@@ -121,7 +121,7 @@ export default defineComponent({
       let val = modInput.value.trim();
       console.log("搜索关键字:" + val);
       if (val === "") return;
-      if (val.substring(0, 4) === "http" && val.length > 10) {
+      if (val.startsWith('http') && val.length > 10) {
         window.location.href = val;
       } else {
         window.location.href = searList[iconBottom.value].url + val;

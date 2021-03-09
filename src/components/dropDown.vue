@@ -71,20 +71,20 @@ export default defineComponent({
 #center {
   position: fixed;
   bottom: -100vh;
-  bottom: 0vh;
+  /* bottom: 0vh; */
   left: 0;
   height: 100vh;
   width: 100vw;
   background: red;
   animation: 1s identifier forwards;
-  opacity:0.5
+  /* opacity:0.5 */
 }
-/* @keyframes identifier {
+@keyframes identifier {
   to {
     background: yellow;
     bottom: 0;
   }
-} */
+}
 .w-e-text-container {
   height: calc(100vh - 66px) !important;
 }
