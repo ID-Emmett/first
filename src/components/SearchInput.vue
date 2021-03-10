@@ -163,7 +163,7 @@ export default defineComponent({
       statusFocus.value = false;
       // console.log("移除keydown事件");
       // 移除keydown事件
-      window.removeEventListener("keydown", (e) => keyeven(e), true);
+      // window.removeEventListener("keydown",  keyeven, true);
     };
     const keyeven = (e: any) => {
       // 阻止tab键默认行为
@@ -173,7 +173,9 @@ export default defineComponent({
       }
     };
     onMounted(() => {
-      // editor.config.historyMaxSize = 50; // 修改为 50 步
+          window.addEventListener("keydown",  keyeven, true);
+
+    // editor.config.historyMaxSize = 50; // 修改为 50 步
       // editor.highlight = (window as any).hljs;
       // const morentxt = localStorage.getItem("editor_txt");
       // strhtml.value = morentxt;
@@ -210,7 +212,6 @@ export default defineComponent({
       // //取值html 渎text
       // editor.txt.text(morentxt || "");
       // 监听keydown事件
-      window.addEventListener("keydown", (e) => keyeven(e), false);
       setTimeout(() => {
         iconBottom.value = Number(localStorage.getItem("search_engine")) || 0;
       }, 1200);
