@@ -10,7 +10,7 @@
     <SlowOut :text="slowTxt" class="slow-out">
       <!-- 插槽-传递二级元素 -->
       <div class="footer">
-        <SearchInput :status='!statusBack' />
+        <SearchInput :status="!statusBack" />
       </div>
     </SlowOut>
   </div>
@@ -43,7 +43,7 @@ export default defineComponent({
       localStorage.setItem("search_engine", "3");
     };
     return {
-      slowTxt,//渐出文本
+      slowTxt, //渐出文本
       statusBack, //回退状态
       but_back, //回退列表事件
     };
