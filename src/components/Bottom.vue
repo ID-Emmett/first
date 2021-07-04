@@ -184,7 +184,6 @@ export default defineComponent({
   bottom: 0px;
   width: 38px;
   height: 24px;
-  /* background: #5096fa; */
   display: flex;
   align-items: center;
   justify-content: space-between;
