@@ -40,7 +40,7 @@ export default defineComponent({
     const statusBack = ref(false);
     const but_back = () => {
       statusBack.value = !statusBack.value;
-      localStorage.setItem("search_engine", "3");
+      // localStorage.setItem("search_engine", "3");
     };
     return {
       slowTxt, //渐出文本
@@ -60,6 +60,7 @@ export default defineComponent({
 .content-box {
   display: flex;
   height: calc(100vh - 24px);
+  min-width: 1000px;
 }
 
 .sidebar {

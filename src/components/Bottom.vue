@@ -5,7 +5,7 @@
       @click="eInput = !eInput"
       :class="[eInput ? 'e-input-da' : '']"
     >
-      按钮
+      input
     </div>
     <!-- <transition-group name="dropanim"> -->
       <DropDown status="瞬移组件拿到的值" v-if="eInput" />
@@ -97,7 +97,7 @@ export default defineComponent({
   width: 100%;
   z-index: 999;
   backdrop-filter: saturate(180%) blur(20px);
-  background-color: #21252b;
+  background-color: #f8fafc;
   position: relative;
   display: flex;
   align-items: center;
@@ -114,8 +114,8 @@ export default defineComponent({
   z-index: 1;
   width: 60px;
   height: 18px;
-  color: antiquewhite;
-  background: #21252b;
+  color: rgb(82, 80, 78);
+  background: #ffffff;
   font-size: 18px;
   padding: 0;
   transition: 0.3s ease-out;
@@ -200,12 +200,16 @@ export default defineComponent({
 .e-input {
   width: 50px;
   height: 100%;
-  background: #5096fa;
+  color: #719ece;
+  background: #ffffff;
+  text-align: center;
+  line-height: 1.5;
 }
 .e-input-da {
-  width: 100px;
+  width: 50px;
   height: 100%;
-  background: rgb(143, 82, 82);
+  color: white;
+  background: rgb(66, 138, 206);
 }
 
 .dropanim-enter-active,
