@@ -79,7 +79,7 @@ export default defineComponent({
   position: relative;
   /* margin: 0 0.1em; */
   top: 2em;
-  font-size: 1.5em;
+  /* font-size: 1.5em; */
   animation: 0.8s swift-up ease-in-out forwards;
 }
 @keyframes swift-up {
